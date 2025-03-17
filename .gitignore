@@ -2,6 +2,7 @@
 data/output/
 
 .idea
+.idea/
 .idea/*
 *.xml
 
