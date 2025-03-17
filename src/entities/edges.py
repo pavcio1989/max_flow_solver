@@ -18,5 +18,5 @@ class Edge:
         self.residual.flow -= bottleneck
 
     def __str__(self):
-        print(f"Edge {self.start} -> {self.end} | flow = {self.flow} \
-        | capacity = {self.capacity} | is residual = {self.is_residual()}")
+        return f"Edge {self.start} -> {self.end} | flow = {self.flow} \
+        | capacity = {self.capacity} | is residual = {self.is_residual()}"

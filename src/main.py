@@ -1,4 +1,4 @@
-from solvers.ford_fulkerson import FordFulkersonDfsSolver
+from src.solvers.ford_fulkerson import FordFulkersonDfsSolver
 
 
 # Initialize graph parameters
@@ -43,6 +43,7 @@ print(f"Maximum flow is: {solver.get_max_flow()}")
 result_graph = solver.get_graph()
 
 # Display all edges of result graph
-for edges in result_graph:
+for node in result_graph:
+    edges = result_graph[node]
     for edge in edges:
         print(edge)

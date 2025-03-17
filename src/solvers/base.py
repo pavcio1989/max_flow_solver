@@ -1,23 +1,21 @@
 from abc import abstractmethod
 from collections import defaultdict
 
-from ..entities.edges import Edge
-
-
-INFINITY = 1000000
+from src.entities.edges import Edge
 
 
 class NetworkFlowSolverBase:
     solved = False
     visited_token = 1
     visited = []
-    __max_flow = None
-    __graph = defaultdict(list)
+    max_flow = 0
+    graph = defaultdict(list)
 
     def __init__(self, n, s, t):
         self.n = n
         self.s = s
         self.t = t
+        self.visited = [0] * n
 
     @abstractmethod
     def solve(self):
@@ -32,16 +30,16 @@ class NetworkFlowSolverBase:
         edge1.residual = edge2
         edge2.residual = edge1
 
-        self.__graph[start_node].append(edge1)
-        self.__graph[end_node].append(edge2)
+        self.graph[start_node].append(edge1)
+        self.graph[end_node].append(edge2)
 
     def get_graph(self):
         self.execute()
-        return self.__graph
+        return self.graph
 
     def get_max_flow(self):
         self.execute()
-        return self.__max_flow
+        return self.max_flow
 
     def execute(self):
         if self.solved:
