@@ -1,4 +1,5 @@
 from src.solvers.ford_fulkerson import FordFulkersonDfsSolver
+from src.solvers.edmond_karp import EdmondKarpSolver
 
 
 # Initialize graph parameters
@@ -10,7 +11,8 @@ s = n - 2
 t = n - 1
 
 # Initialize MaxFlow solver class
-solver = FordFulkersonDfsSolver(n, s, t)
+# solver = FordFulkersonDfsSolver(n, s, t)
+solver = EdmondKarpSolver(n, s, t)
 
 # Create graph
 # Add edges from source

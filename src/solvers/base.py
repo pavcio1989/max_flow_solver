@@ -46,3 +46,13 @@ class NetworkFlowSolverBase:
             return
         self.solved = True
         self.solve()
+
+    # Mark node 'i' as visited
+    def visit(self, i: int):
+        self.visited[i] = self.visited_token
+
+    def is_visited(self, i: int):
+        return self.visited[i] == self.visited_token
+
+    def mark_all_nodes_as_unvisited(self):
+        self.visited_token += 1
