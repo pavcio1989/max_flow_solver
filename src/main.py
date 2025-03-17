@@ -1,16 +1,48 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from solvers.ford_fulkerson import FordFulkersonDfsSolver
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Initialize graph parameters
+# Number of nodes (source and sink inclusive)
+n = 12
 
+# Source and sink index
+s = n - 2
+t = n - 1
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Initialize MaxFlow solver class
+solver = FordFulkersonDfsSolver(n, s, t)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Create graph
+# Add edges from source
+solver.add_edge(s, 0, 10)
+solver.add_edge(s, 1, 5)
+solver.add_edge(s, 2, 10)
+
+# Add middle edges
+solver.add_edge(0, 3, 10)
+solver.add_edge(1, 2, 10)
+solver.add_edge(2,5, 15)
+solver.add_edge(3, 1, 2)
+solver.add_edge(3, 6, 15)
+solver.add_edge(4, 3, 3)
+solver.add_edge(4, 1, 15)
+solver.add_edge(5, 4, 4)
+solver.add_edge(5, 8, 10)
+solver.add_edge(6, 7, 10)
+solver.add_edge(7, 4, 10)
+solver.add_edge(7, 5, 7)
+
+# Add edges to sink
+solver.add_edge(6, t, 15)
+solver.add_edge(8, t, 10)
+
+# Get maximum flow value
+print(f"Maximum flow is: {solver.get_max_flow()}")
+
+# Get result graph
+result_graph = solver.get_graph()
+
+# Display all edges of result graph
+for edges in result_graph:
+    for edge in edges:
+        print(edge)
