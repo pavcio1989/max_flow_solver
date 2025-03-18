@@ -1,6 +1,9 @@
-from src.solvers.ford_fulkerson import FordFulkersonDfsSolver
-from src.solvers.edmond_karp import EdmondKarpSolver
+import os
 
+from src.solvers.edmond_karp import EdmondKarpSolver
+from src.utils.visuals import visualize_points_and_flows
+
+cwd = os.path.dirname(os.getcwd())
 
 # Initialize graph parameters
 # Number of nodes (source and sink inclusive)
@@ -42,10 +45,18 @@ solver.add_edge(8, t, 10)
 print(f"Maximum flow is: {solver.get_max_flow()}")
 
 # Get result graph
-result_graph = solver.get_graph()
+result_graph = solver.get_simple_graph()
 
 # Display all edges of result graph
 for node in result_graph:
+    print(f"Node: {node}")
     edges = result_graph[node]
     for edge in edges:
         print(edge)
+
+# Visualise network flow graph
+DG, pos = solver.get_directed_graph()
+
+output_path = f"{cwd}/images/output/flow_chart.png"
+
+visualize_points_and_flows(DG, pos, output_path)

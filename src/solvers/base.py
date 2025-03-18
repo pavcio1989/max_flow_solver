@@ -1,5 +1,6 @@
 from abc import abstractmethod
 from collections import defaultdict
+import networkx as nx
 
 from src.entities.edges import Edge
 
@@ -10,6 +11,7 @@ class NetworkFlowSolverBase:
     visited = []
     max_flow = 0
     graph = defaultdict(list)
+    directed_graph = None
 
     def __init__(self, n, s, t):
         self.n = n
@@ -33,9 +35,36 @@ class NetworkFlowSolverBase:
         self.graph[start_node].append(edge1)
         self.graph[end_node].append(edge2)
 
-    def get_graph(self):
+    def get_simple_graph(self):
         self.execute()
         return self.graph
+
+    def get_directed_graph(self):
+        self.execute()
+
+        # Create empty NX directed graph
+        dg = nx.DiGraph()
+
+        # Fill graph with nodes and edges
+        for node in self.graph:
+            node_type = "middle"
+            if node == self.s:
+                node_type = "source"
+            if node == self.t:
+                node_type = "sink"
+            dg.add_node(node, type=node_type)
+
+            edges = self.graph[node]
+            for edge in edges:
+                print(edge)
+                dg.add_edge(edge.start, edge.end, flow=edge.flow, capacity=edge.capacity,
+                            is_residual=edge.is_residual())
+
+        pos = nx.spring_layout(dg, seed=1237)
+
+        self.directed_graph = dg
+
+        return self.directed_graph, pos
 
     def get_max_flow(self):
         self.execute()
