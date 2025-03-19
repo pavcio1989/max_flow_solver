@@ -1,0 +1,7 @@
+data:
+  input_file: data/input/example_1.txt
+  input_file_details:
+    node_count: 11
+    source_id: 9
+    sink_id: 10
+  output_folder: data/output
