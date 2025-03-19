@@ -1,13 +1,13 @@
 from collections import deque
 
-from src.solvers.base import NetworkFlowSolverBase
+from src.solvers.base import NetworkFlowBaseSolver
 from src.entities.edges import Edge
 
 
 INFINITY = 1000000
 
 
-class EdmondKarpSolver(NetworkFlowSolverBase):
+class EdmondKarpSolver(NetworkFlowBaseSolver):
     def __init__(self, n, s, t):
         super().__init__(n, s, t)
 

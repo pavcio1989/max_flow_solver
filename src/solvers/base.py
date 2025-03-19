@@ -5,7 +5,7 @@ import networkx as nx
 from src.entities.edges import Edge
 
 
-class NetworkFlowSolverBase:
+class NetworkFlowBaseSolver:
     solved = False
     visited_token = 1
     visited = []
@@ -56,7 +56,6 @@ class NetworkFlowSolverBase:
 
             edges = self.graph[node]
             for edge in edges:
-                print(edge)
                 dg.add_edge(edge.start, edge.end, flow=edge.flow, capacity=edge.capacity,
                             is_residual=edge.is_residual())
 

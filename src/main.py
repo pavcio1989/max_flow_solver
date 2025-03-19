@@ -1,21 +1,26 @@
 import os
 
+from src.solvers.ford_fulkerson import FordFulkersonDfsSolver
 from src.solvers.edmond_karp import EdmondKarpSolver
+from src.solvers.capacity_scaling import CapacityScalingSolver
 from src.utils.visuals import visualize_points_and_flows
 
 cwd = os.path.dirname(os.getcwd())
 
 # Initialize graph parameters
 # Number of nodes (source and sink inclusive)
-n = 12
+n = 11
 
 # Source and sink index
 s = n - 2
 t = n - 1
+print(f"Source node: {s}")
+print(f"Sink node: {t}")
 
 # Initialize MaxFlow solver class
 # solver = FordFulkersonDfsSolver(n, s, t)
-solver = EdmondKarpSolver(n, s, t)
+# solver = EdmondKarpSolver(n, s, t)
+solver = CapacityScalingSolver(n, s, t)
 
 # Create graph
 # Add edges from source
@@ -49,7 +54,6 @@ result_graph = solver.get_simple_graph()
 
 # Display all edges of result graph
 for node in result_graph:
-    print(f"Node: {node}")
     edges = result_graph[node]
     for edge in edges:
         print(edge)

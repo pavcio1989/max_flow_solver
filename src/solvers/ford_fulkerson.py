@@ -1,10 +1,10 @@
-from src.solvers.base import NetworkFlowSolverBase
+from src.solvers.base import NetworkFlowBaseSolver
 
 
 INFINITY = 1000000
 
 
-class FordFulkersonDfsSolver(NetworkFlowSolverBase):
+class FordFulkersonDfsSolver(NetworkFlowBaseSolver):
     def __init__(self, n, s, t):
         super().__init__(n, s, t)
 
@@ -23,14 +23,13 @@ class FordFulkersonDfsSolver(NetworkFlowSolverBase):
             return flow
 
         # Mark the current node as visited
-        self.visited[node] = self.visited_token
+        self.visit(node)
 
-        edges = self.graph[node]
-
-        for edge in edges:
-            if edge.get_remaining_capacity() > 0 and self.visited[edge.end] != self.visited_token:
+        for edge in self.graph[node]:
+            if edge.get_remaining_capacity() > 0 and not self.is_visited(edge.end):
                 bottleneck = self.dfs(edge.end, min(flow, edge.get_remaining_capacity()))
 
+                # Augment flow with bottleneck value
                 if bottleneck > 0:
                     edge.augment(bottleneck)
                     return bottleneck

@@ -25,7 +25,7 @@ def visualize_points_and_flows(graph, node_coordinates, output_path):
         go.Scatter(
             x=[float(node_coordinates[node][0]) for node in graph.nodes],
             y=[float(node_coordinates[node][1]) for node in graph.nodes],
-            text=[node[1]["type"] for node in graph.nodes.data()],
+            text=[f"{node[0]}_{node[1]['type']}" for node in graph.nodes.data()],
             mode='markers+text',
             textposition="top center",
             marker=dict(
