@@ -3,6 +3,8 @@ from collections import defaultdict
 import networkx as nx
 
 from src.entities.edges import Edge
+from src.config.config import Config
+from src.data_manager.data_loader import DataLoader
 
 
 class NetworkFlowBaseSolver:
@@ -13,15 +15,21 @@ class NetworkFlowBaseSolver:
     graph = defaultdict(list)
     directed_graph = None
 
-    def __init__(self, n, s, t):
-        self.n = n
-        self.s = s
-        self.t = t
-        self.visited = [0] * n
+    def __init__(self, config: Config):
+        self.n = config.node_count
+        self.s = config.source_id
+        self.t = config.sink_id
+        self.config = config
+        self.visited = [0] * self.n
 
     @abstractmethod
     def solve(self):
         pass
+
+    def add_edges(self):
+        edges_raw = DataLoader(self.config).load_edges_data()
+        for edge_raw in edges_raw:
+            self.add_edge(edge_raw[0], edge_raw[1], edge_raw[2])
 
     def add_edge(self, start_node, end_node, capacity):
         if capacity <= 0:

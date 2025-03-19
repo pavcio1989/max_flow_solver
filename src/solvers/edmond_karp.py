@@ -8,8 +8,8 @@ INFINITY = 1000000
 
 
 class EdmondKarpSolver(NetworkFlowBaseSolver):
-    def __init__(self, n, s, t):
-        super().__init__(n, s, t)
+    def __init__(self, config):
+        super().__init__(config)
 
     def solve(self):
         flow = INFINITY

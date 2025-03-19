@@ -8,8 +8,8 @@ INFINITY = 1000000
 class CapacityScalingSolver(NetworkFlowBaseSolver):
     delta: int = 0
 
-    def __init__(self, n, s, t):
-        super().__init__(n, s, t)
+    def __init__(self, config):
+        super().__init__(config)
 
     def add_edge(self, start_node, end_node, capacity):
         super().add_edge(start_node, end_node, capacity)
