@@ -4,4 +4,5 @@ data:
     node_count: 11
     source_id: 9
     sink_id: 10
-  output_folder: data/output
+  output_data_folder: data/output
+  output_image_folder: images/output

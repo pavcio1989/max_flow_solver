@@ -13,7 +13,9 @@ class Config:
         self.source_id_raw = self.input['data']['input_file_details']['source_id']
         self.sink_id_raw = self.input['data']['input_file_details']['sink_id']
 
+        # Set source and sink index
         self.source_id = self.node_count - 2
         self.sink_id = self.node_count - 1
 
-        self.output_folder = self.input['data']['output_folder']
+        self.output_data_folder = self.input['data']['output_data_folder']
+        self.output_image_folder = self.input['data']['output_image_folder']
