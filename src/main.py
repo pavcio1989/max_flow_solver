@@ -6,9 +6,12 @@ if __name__ == "__main__":
     import os
 
     from src.config.config import Config
+
     from src.solvers.ford_fulkerson import FordFulkersonDfsSolver
     from src.solvers.edmond_karp import EdmondKarpSolver
     from src.solvers.capacity_scaling import CapacityScalingSolver
+    from src.solvers.dinics import DinicsSolver
+
     from src.utils.visuals import visualize_points_and_flows
 
     cwd = os.path.dirname(os.getcwd())
@@ -16,9 +19,11 @@ if __name__ == "__main__":
     config = Config()
 
     # Initialize MaxFlow solver class
+
     # solver = FordFulkersonDfsSolver(config)
     # solver = EdmondKarpSolver(config)
-    solver = CapacityScalingSolver(config)
+    # solver = CapacityScalingSolver(config)
+    solver = DinicsSolver(config)
 
     # Create graph
     solver.add_edges()
@@ -38,6 +43,6 @@ if __name__ == "__main__":
     # Visualise network flow graph
     DG, pos = solver.get_directed_graph()
 
-    output_path = config.output_image_folder+"/flow_chart.png"
+    output_path = f"{config.output_image_folder}/{config.input_file_path.split('/')[-1].split('.')[-2]}_flow_chart.png"
 
     visualize_points_and_flows(DG, pos, output_path)
