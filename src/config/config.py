@@ -4,6 +4,8 @@ import yaml
 class Config:
     def __init__(self):
         self.input = None
+
+        # Data YAML
         with open('src/config/data.yml', 'r') as data_file:
             self.input = yaml.safe_load(data_file)
 
@@ -19,3 +21,13 @@ class Config:
 
         self.output_data_folder = self.input['data']['output_data_folder']
         self.output_image_folder = self.input['data']['output_image_folder']
+
+        # Pipeline YAML
+        with open('src/config/pipeline.yml', 'r') as pipeline_file:
+            self.input = yaml.safe_load(pipeline_file)
+
+        self.solvers = {}
+        for solver_name in self.input['solvers']:
+            self.solvers[solver_name] = self.input['solvers'][solver_name]
+
+        self.generate_report = self.input['report']
