@@ -1,0 +1,6 @@
+solvers:
+  ford_fulkerson: True
+  edmond_karp: True
+  dinics: True
+  capacity_scaling: True
+report: True
